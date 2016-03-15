@@ -2,6 +2,7 @@ package daoimpl01917;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import connector01917.Connector;
@@ -23,11 +24,20 @@ public class MySQLProduktBatchDAO implements ProduktBatchDAO {
 		
 	}
 
-	@Override
-	public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
+//		List<ProduktBatchDTO> List = new ArrayList<ProduktBatchDTO>();
+//		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch");
+//		try{
+//			while (rs.next()){
+//				list.add(new ProduktBatchDTO(rs.getInt("produktbatch_id"), rs.getString("")));
+//			}
+//		}catch(SQLException e){
+//			throw new DALException(e);
+//		}
+//		return list;
+//		}
+//	}
 
 	@Override
 	public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
