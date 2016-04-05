@@ -2,11 +2,13 @@ package daoimpl01917;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RaavareBatchDAO;
+import dto01917.OperatoerDTO;
 import dto01917.RaavareBatchDTO;
 
 public class MySQLRaavareDAO implements RaavareBatchDAO{
@@ -23,8 +25,17 @@ public class MySQLRaavareDAO implements RaavareBatchDAO{
 
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
+		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer");
+		try
+		{
+			while (rs.next()) 
+			{
+				list.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getInt("maengde")));
+			}
+		}
+		catch (SQLException e) { throw new DALException(e); }
+		return list;
 	}
 
 	@Override
