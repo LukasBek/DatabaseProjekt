@@ -23,8 +23,8 @@ public class ReceptKompTest {
 		try { System.out.println(receptKomp.getReceptKomp(3, 1)); }
 		catch (DALException e) { System.out.println(e.getMessage()); }
 		
-		System.out.println("Indsaettelse af ny recept med recept_id =  4, raavare_id = 5");
-		ReceptKompDTO receptKompDTO = new ReceptKompDTO(4, 5, 5.0, 0.1);
+		System.out.println("Indsaettelse af ny receptkomponent med recept_id =  3, raavare_id = 5");
+		ReceptKompDTO receptKompDTO = new ReceptKompDTO(4, 2, 5.0, 0.1);
 		try { receptKomp.createReceptKomp(receptKompDTO); }
 		catch (DALException e) { System.out.println(e.getMessage()); }	
 		
