@@ -30,7 +30,7 @@ public class MySQLProduktBatchDAO implements ProduktBatchDAO {
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch");
 		try{
 			while (rs.next()){
-				list.add(new ProduktBatchDTO(rs.getInt("produktbatch_id"), rs.getInt("Status"), rs.getInt("recept_id")));
+				list.add(new ProduktBatchDTO(rs.getInt("pb_id"), rs.getInt("Status"), rs.getInt("recept_id")));
 			}
 		}catch(SQLException e){
 			throw new DALException(e);
@@ -42,8 +42,8 @@ public class MySQLProduktBatchDAO implements ProduktBatchDAO {
 	@Override
 	public void createProduktBatch(ProduktBatchDTO pb) throws DALException {
 		Connector.doUpdate(
-				"INSER INTO produktbatch(pb_id, status, recept_id) VALUES"
-					+ "(" + pb.getPbId() + ", '" + pb.getStatus() + "', '" + pb.getReceptId() + "')"
+				"INSERT INTO produktbatch(pb_id, status, recept_id) VALUES"
+					+ "(" + pb.getPbId() + ", " + pb.getStatus() + ", " + pb.getReceptId() + ")"
 				);
 
 	}
@@ -51,8 +51,8 @@ public class MySQLProduktBatchDAO implements ProduktBatchDAO {
 	@Override
 	public void updateProduktBatch(ProduktBatchDTO pb) throws DALException {
 		Connector.doUpdate(
-				"UPDATE produktbatch SET  pb_id = '" + pb.getPbId() + "', status =  '" + pb.getStatus() + 
-				"', recept_id = '" + pb.getReceptId()
+				"UPDATE produktbatch SET  status =  " + pb.getStatus() + 
+				", recept_id = " + pb.getReceptId() + " WHERE pb_id = " + pb.getPbId()
 		);
 
 	}
