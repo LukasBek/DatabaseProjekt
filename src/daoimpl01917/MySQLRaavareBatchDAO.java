@@ -11,7 +11,7 @@ import daointerfaces01917.RaavareBatchDAO;
 import dto01917.OperatoerDTO;
 import dto01917.RaavareBatchDTO;
 
-public class MySQLRaavareDAO implements RaavareBatchDAO{
+public class MySQLRaavareBatchDAO implements RaavareBatchDAO{
 
 	@Override
 	public RaavareBatchDTO getRaavareBatch(int rbId) throws DALException {
@@ -40,13 +40,22 @@ public class MySQLRaavareDAO implements RaavareBatchDAO{
 
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
+		ResultSet rs = Connector .doQuery("SELECT * FROM raavare");
+		try
+		{
+			while (rs.next()){
+				list.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getInt("maengde")));
+			}
+		}
+		catch (SQLException e) { throw new DALException(e); }
+		return list;
 	}
 
 	@Override
 	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
-		// TODO Auto-generated method stub
+//		Connector.doQuery(
+//				"INSERT INTO raavare(rb_id, raavare_id, maengde) VALUES " + "(" + );
 		
 	}
 
