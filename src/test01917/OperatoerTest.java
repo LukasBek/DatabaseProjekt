@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import connector01917.Connector;
 
-public class Main {
+public class OperatoerTest {
 	public static void main(String[] args) {
 		try { new Connector(); } 
 		catch (InstantiationException e) { e.printStackTrace(); }
