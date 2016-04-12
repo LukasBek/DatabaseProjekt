@@ -15,18 +15,35 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO{
 
 	@Override
 	public RaavareBatchDTO getRaavareBatch(int rbId) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM Raavarebatch rb_id = " + rbId);
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch rb_id = " + rbId);
 		try{
-	    	if (!rs.first()) throw new DALException("Raavarebatchen " + rbId + " findes ikke");
+	    	if (!rs.first()) throw new DALException("raavarebatch " + rbId + " findes ikke");
 	    	return new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getInt("maengde"));		
 		}
 		catch (SQLException e) {throw new DALException(e);}
 	}
-
+	
+	@Override
+	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
+		Connector.doQuery(
+				"INSERT INTO raavarebatch(rb_id, raavare_id, maengde) VALUES " + 
+						"(" + raavarebatch.getRbId() + "', '" + raavarebatch.getRaavareId() + "', '" + raavarebatch.getMaengde() + "')'"
+				);
+		
+	}
+	
+	@Override
+	public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
+		Connector.doUpdate(
+				"UPDATE raavarebatch SET  raavare_id = '" + raavarebatch.getRaavareId() + "', manegde =  '" + raavarebatch.getMaengde() 
+				+ "' WHERE rb_id = " + raavarebatch.getRbId()
+				);
+	}
+	
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList() throws DALException {
 		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
-		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer");
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch");
 		try
 		{
 			while (rs.next()) 
@@ -37,33 +54,19 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO{
 		catch (SQLException e) { throw new DALException(e); }
 		return list;
 	}
-
+	
 	@Override
 	public List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException {
 		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
-		ResultSet rs = Connector .doQuery("SELECT * FROM raavare");
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE raavare_id = " + raavareId);
 		try
 		{
-			while (rs.next()){
+			while (rs.next()) 
+			{
 				list.add(new RaavareBatchDTO(rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getInt("maengde")));
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
 		return list;
 	}
-
-	@Override
-	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
-//		Connector.doQuery(
-//				"INSERT INTO raavare(rb_id, raavare_id, maengde) VALUES " + "(" + );
-		
-	}
-
-	@Override
-	public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
 }
