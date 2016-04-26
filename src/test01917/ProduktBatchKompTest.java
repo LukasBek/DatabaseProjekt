@@ -2,7 +2,7 @@ package test01917;
 
 import java.sql.SQLException;
 import connector01917.Connector;
-import daoimpl01917.MySQLProduktBatchKompDAO;
+import daoimpl01917.MySQLProduktBatchDAO;
 import daointerfaces01917.DALException;
 import dto01917.ProduktBatchKompDTO;
 
@@ -15,7 +15,7 @@ public class ProduktBatchKompTest {
 		catch (SQLException e) { e.printStackTrace(); }
 		
 		System.out.println("ProduktBatchKomp 3:");
-		MySQLProduktBatchKompDAO pbk = new MySQLProduktBatchKompDAO();
+		MySQLProduktBatchDAO pbk = new MySQLProduktBatchDAO();
 		try { System.out.println(pbk.getProduktBatchKomp(3, 3)); }
 		catch (DALException e) { System.out.println(e.getMessage()); }
 		
