@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import connector01917.Connector;
 import daoimpl01917.MySQLReceptDAO;
-import daoimpl01917.MySQLReceptKompDAO;
 import daointerfaces01917.DALException;
 import dto01917.ReceptDTO;
 import dto01917.ReceptKompDTO;
@@ -19,7 +18,7 @@ public class ReceptKompTest {
 		catch (SQLException e) { e.printStackTrace(); }
 		
 		System.out.println("Recept 3, råvare 1:");
-		MySQLReceptKompDAO receptKomp = new MySQLReceptKompDAO();
+		MySQLReceptDAO receptKomp = new MySQLReceptDAO();
 		try { System.out.println(receptKomp.getReceptKomp(3, 1)); }
 		catch (DALException e) { System.out.println(e.getMessage()); }
 		
