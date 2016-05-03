@@ -101,7 +101,7 @@ public class MySQLReceptDAO implements ReceptDAO{
 				"INSERT INTO receptkomponent(recept_id, raavare_id, nom_netto, tolerance) VALUES " +
 				"(" + receptkomponent.getReceptId() + ", '" + receptkomponent.getRaavareId() + "', '" + receptkomponent.getNomNetto() + "', '" + 
 				receptkomponent.getTolerance() + "')"
-			);
+			);	
 	}
 
 	@Override
